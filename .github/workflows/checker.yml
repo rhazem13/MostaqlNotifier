@@ -1,0 +1,33 @@
+name: Mostaql Notifier
+
+on:
+  schedule:
+    # Runs every 20 minutes. 
+    # (Running too fast like 5 mins increases risk of cookie ban)
+    - cron: '*/20 * * * *'
+  
+  # Allows you to click "Run Now" button manually for testing
+  workflow_dispatch:
+
+jobs:
+  check-notifications:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Install Libraries
+        run: pip install requests
+
+      - name: Run Monitor Script
+        env:
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          MOSTAQL_COOKIE: ${{ secrets.MOSTAQL_COOKIE }}
+        run: python mostaql_monitor.py
