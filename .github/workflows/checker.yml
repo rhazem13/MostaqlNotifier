@@ -29,5 +29,5 @@ jobs:
         env:
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           hazemtoken: ${{ secrets.HAZEMTOKEN }}
-          sharaftoken: ${{ secrets.SHARAFTOKEN }}
+          hazem2token: ${{ secrets.HAZEM2TOKEN }}
         run: python mostaql_monitor.py

@@ -1,11 +1,9 @@
+import os
+
 import requests
 
-TELEGRAM_TOKEN = "8581380919:AAFUSFVlEId5CTBrIbMLPEYz6LCh2W7QyX8"
-CHAT_IDS = {
-    "Hazem": "765118363",
-    "Yehya": "5105261498",
-    "Sharaf": "801534705",
-}
+TELEGRAM_TOKEN = (os.environ.get("TELEGRAM_TOKEN") or "").strip()
+CHAT_IDS = {"Hazem": "765118363"}
 MESSAGE = "Hello world"
 
 
@@ -17,6 +15,10 @@ def call_telegram(endpoint, method="get", **kwargs):
 
 
 def main():
+    if not TELEGRAM_TOKEN:
+        print("TELEGRAM_TOKEN is missing")
+        return
+
     try:
         me_response = call_telegram("getMe")
         print(f"Bot check: {me_response.status_code} {me_response.text}")

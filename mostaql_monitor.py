@@ -12,15 +12,15 @@ def read_env_any(*keys):
 
 # 1. Load Secrets
 TELEGRAM_TOKEN = (os.environ.get("TELEGRAM_TOKEN") or "").strip()
-# Always send to these three recipients.
-TELEGRAM_CHAT_IDS = ["765118363", "5105261498", "801534705"]
+# Always send to this recipient.
+TELEGRAM_CHAT_IDS = ["765118363"]
 
 HAZEM_TOKEN = read_env_any("hazemtoken", "HAZEMTOKEN")
-SHARAF_TOKEN = read_env_any("sharaftoken", "SHARAFTOKEN")
+HAZEM2_TOKEN = read_env_any("hazem2token", "HAZEM2TOKEN")
 
 MOSTAQL_ACCOUNTS = [
     ("HazemToken", HAZEM_TOKEN),
-    ("SharafToken", SHARAF_TOKEN),
+    ("Hazem2Token", HAZEM2_TOKEN),
 ]
 
 if not TELEGRAM_TOKEN:
@@ -31,8 +31,8 @@ if not HAZEM_TOKEN:
     print("Error: hazemtoken is missing! Set env var hazemtoken (or HAZEMTOKEN).")
     sys.exit(1)
 
-if not SHARAF_TOKEN:
-    print("Error: sharaftoken is missing! Set env var sharaftoken (or SHARAFTOKEN).")
+if not HAZEM2_TOKEN:
+    print("Error: hazem2token is missing! Set env var hazem2token (or HAZEM2TOKEN).")
     sys.exit(1)
 
 # 2. Configuration - WE USE THE API URL NOW
